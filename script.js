@@ -156,20 +156,65 @@ let mistakes = 0;
 ====================================== */
 
 const container = document.querySelector(".container");
-
 const questionText = document.getElementById("questionText");
-
 const questionImage = document.getElementById("questionImage");
-
 const message = document.getElementById("message");
-
 const answers = document.getElementById("answers");
-
 const modal = document.getElementById("imageModal");
-
 const modalImage = document.getElementById("modalImage");
-
 const closeImage = document.getElementById("closeImage");
+
+
+/* ======================================
+        ПРЕДЗАГРУЗКА КАРТИНОК
+====================================== */
+
+function preloadImages(){
+
+    QUESTIONS.forEach(q=>{
+
+        const img = new Image();
+
+        img.src = q.image;
+
+    });
+
+    const finish = new Image();
+
+    finish.src = "images/6.jpg";
+
+}
+
+
+/* ======================================
+    АВТОРАЗМЕР ВОПРОСА
+====================================== */
+
+function fitQuestion(){
+
+    const len = questionText.textContent.length;
+
+    let size = 30;
+
+    if(len > 45) size = 27;
+
+    if(len > 70) size = 23;
+
+    if(window.innerWidth <= 700){
+
+        size = 20;
+
+        if(len > 45) size = 18;
+
+        if(len > 70) size = 16;
+
+    }
+
+    questionText.style.fontSize = size + "px";
+
+}
+
+window.addEventListener("resize", fitQuestion);
 
 
 /* ======================================
@@ -185,6 +230,8 @@ function showQuestion(){
     const q = QUESTIONS[currentQuestion];
 
     questionText.textContent = q.question;
+
+    fitQuestion();
 
     questionImage.src = q.image;
 
@@ -203,8 +250,6 @@ function showQuestion(){
     });
 
 }
-
-
 /* ======================================
         ПРОВЕРКА ОТВЕТА
 ====================================== */
@@ -217,31 +262,28 @@ function checkAnswer(index,button){
 
         button.classList.add("correct");
 
-        message.textContent = "✅ "+TEXT.correct;
+        message.textContent = "✅ " + TEXT.correct;
 
         [...answers.children].forEach(btn=>btn.disabled=true);
 
-        setTimeout(nextQuestion,800);
+        setTimeout(nextQuestion,900);
 
-    }
-
-    else{
+    }else{
 
         mistakes++;
 
-        button.disabled = true;
+        button.disabled=true;
 
         button.classList.add("wrong");
 
-        const text = TEXT.mistakes[Math.min(
+        const text=TEXT.mistakes[
+            Math.min(
+                mistakes-1,
+                TEXT.mistakes.length-1
+            )
+        ];
 
-            mistakes-1,
-
-            TEXT.mistakes.length-1
-
-        )];
-
-        message.textContent = "❌ "+text;
+        message.textContent="❌ "+text;
 
     }
 
@@ -256,8 +298,9 @@ function nextQuestion(){
 
     container.style.opacity="0";
 
-    container.style.transform="translateY(20px)";
-        setTimeout(()=>{
+    container.style.transform="translateY(20px) scale(.98)";
+
+    setTimeout(()=>{
 
         currentQuestion++;
 
@@ -273,32 +316,32 @@ function nextQuestion(){
 
         container.style.opacity="1";
 
-        container.style.transform="translateY(0)";
+        container.style.transform="translateY(0) scale(1)";
 
-    },300);
+    },280);
 
 }
 
 
 /* ======================================
-          ФИНАЛЬНЫЙ ЭКРАН
+          ФИНАЛ
 ====================================== */
 
 function showFinish(){
 
-    container.innerHTML = `
+    container.innerHTML=`
 
         <div class="finish">
 
-            <img
-                src="images/6.jpg"
-                alt="Финал">
+            <div class="finish-image-box">
 
-            <p>
+                <img
+                    src="images/6.jpg"
+                    alt="Финал">
 
-                ${TEXT.finish}
+            </div>
 
-            </p>
+            <p>${TEXT.finish}</p>
 
         </div>
 
@@ -306,15 +349,15 @@ function showFinish(){
 
     container.style.opacity="0";
 
-    container.style.transform="translateY(20px)";
+    container.style.transform="translateY(20px) scale(.98)";
 
     setTimeout(()=>{
 
         container.style.opacity="1";
 
-        container.style.transform="translateY(0)";
+        container.style.transform="translateY(0) scale(1)";
 
-    },50);
+    },40);
 
 }
 
@@ -323,23 +366,21 @@ function showFinish(){
         ПРОСМОТР КАРТИНКИ
 ====================================== */
 
-questionImage.onclick = ()=>{
+questionImage.onclick=()=>{
 
-    modalImage.src = questionImage.src;
+    modalImage.src=questionImage.src;
 
     modal.classList.add("show");
 
 };
 
-
-closeImage.onclick = ()=>{
+closeImage.onclick=()=>{
 
     modal.classList.remove("show");
 
 };
 
-
-modal.onclick = (e)=>{
+modal.onclick=(e)=>{
 
     if(e.target===modal){
 
@@ -353,5 +394,7 @@ modal.onclick = (e)=>{
 /* ======================================
             ЗАПУСК
 ====================================== */
+
+preloadImages();
 
 showQuestion();
