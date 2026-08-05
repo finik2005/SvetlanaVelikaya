@@ -73,7 +73,7 @@ body{
 
         ),
 
-        url("background.jpg");
+        url("background-desktop.jpg");
 
     background-size:cover;
 
@@ -538,6 +538,27 @@ body{
 /* Очень маленькие телефоны */
 
 @media (max-height:720px){
+  body{
+
+    background:
+
+        linear-gradient(
+
+            rgba(0,0,0,.45),
+
+            rgba(0,0,0,.45)
+
+        ),
+
+        url("background-mobile.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+}
 
     .container{
 
