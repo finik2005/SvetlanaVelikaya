@@ -9,52 +9,49 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Мини-тест</title>
+    <title>Тест</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
 
 </head>
 
 <body>
 
-    <main class="container">
+    <div class="container">
 
-        <!-- Вопрос -->
+        <div class="question-box">
 
-        <section class="question-box">
+            <h1 id="questionText"></h1>
 
-            <h2 id="questionText"></h2>
+        </div>
 
-        </section>
-
-        <!-- Картинка -->
-
-        <section class="image-box">
+        <div class="image-box">
 
             <img
                 id="questionImage"
                 src=""
                 alt="Вопрос">
 
-        </section>
+        </div>
 
-        <!-- Сообщение после ошибки -->
+        <div id="message"></div>
 
-        <section id="message"></section>
-
-        <!-- Варианты ответа -->
-
-        <section
+        <div
             id="answers"
             class="answers-grid">
 
-        </section>
+        </div>
 
-    </main>
+    </div>
 
-    <!-- Увеличение изображения -->
 
-    <div id="imageModal">
+    <!-- Просмотр изображения -->
+
+    <div
+        id="imageModal"
+        class="modal">
 
         <span id="closeImage">
 
@@ -64,10 +61,10 @@
 
         <img
             id="modalImage"
-            src=""
-            alt="">
+            alt="Просмотр">
 
     </div>
+
 
     <script src="script.js"></script>
 
