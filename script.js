@@ -6,7 +6,7 @@ const TEXT = {
 
     correct: "Правильно молодец",
 
-    finish: "За 250руб сделаю с любыми фото и текстом tg @mmpler",
+    finish: "За 150руб сделаю с любыми фото и текстом tg @mmpler",
 
     mistakes: [
 
