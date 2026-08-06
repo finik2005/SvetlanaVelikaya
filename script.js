@@ -135,7 +135,7 @@ const QUESTIONS = [
 
         ],
 
-        correct:3
+        correct:0
 
     }
 
