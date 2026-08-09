@@ -119,6 +119,28 @@ const QUESTIONS = [
 
     {
 
+        image:"images/7.jpg",
+
+        question:"Вам снился этот человек?",
+
+        answers:[
+
+            "Нет",
+
+            "Да",
+
+            "Мне не снятся сны",
+
+            "Видел только в фантазиях"
+
+        ],
+
+        correct:1
+
+    },
+            
+    {
+
         image:"images/5.jpg",
 
         question:"Я устал придумывать вопросы гадай сама",
@@ -137,7 +159,7 @@ const QUESTIONS = [
 
         correct:2
 
-    }
+    }        
 
 ];
 
